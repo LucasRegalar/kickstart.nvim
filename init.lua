@@ -91,7 +91,7 @@ vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
 
 -- Set to true if you have a Nerd Font installed and selected in the terminal
-vim.g.have_nerd_font = false
+vim.g.have_nerd_font = true
 
 -- [[ Setting options ]]
 -- See `:help vim.o`
@@ -102,7 +102,7 @@ vim.g.have_nerd_font = false
 vim.o.number = true
 -- You can also add relative line numbers, to help with jumping.
 --  Experiment for yourself to see if you like it!
--- vim.o.relativenumber = true
+vim.o.relativenumber = true
 
 -- Enable mouse mode, can be useful for resizing splits for example!
 vim.o.mouse = 'a'
@@ -171,7 +171,7 @@ vim.o.confirm = true
 
 -- Clear highlights on search when pressing <Esc> in normal mode
 --  See `:help hlsearch`
-vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
+vim.keymap.set('n', '<leader>h', '<cmd>nohlsearch<CR>')
 
 -- Diagnostic keymaps
 vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostic [Q]uickfix list' })
@@ -204,6 +204,22 @@ vim.keymap.set('n', '<C-k>', '<C-w><C-k>', { desc = 'Move focus to the upper win
 -- vim.keymap.set("n", "<C-S-l>", "<C-w>L", { desc = "Move window to the right" })
 -- vim.keymap.set("n", "<C-S-j>", "<C-w>J", { desc = "Move window to the lower" })
 -- vim.keymap.set("n", "<C-S-k>", "<C-w>K", { desc = "Move window to the upper" })
+
+-- ----- [[ Add my own keymaps ]] -----
+
+-- jj for esc --
+vim.keymap.set('i', 'jj', '<ESC>')
+
+-- Delete without affecting registers
+vim.keymap.set({ 'n', 'x' }, '<leader>d', '"_d', { desc = 'Black-hole delete' })
+vim.keymap.set({ 'n', 'x' }, '<leader>c', '"_c', { desc = 'Black-hole change' })
+vim.keymap.set('n', '<leader>x', '"_x', { desc = 'Black-hole delete char' })
+
+-- Paste without overwriting registers
+vim.keymap.set({ 'n', 'x' }, '<leader>p', '"_dP', { desc = 'Paste without clobbering yank' })
+
+-- Insert: Delete char under/infront cursor
+vim.keymap.set('i', '<C-l>', '<C-o>x', { desc = 'Delete char in front' })
 
 -- [[ Basic Autocommands ]]
 --  See `:help lua-guide-autocommands`
